@@ -1,0 +1,44 @@
+@page "/books"
+@using Domain.Repositories
+@using Domain.Repositories.Interfaces
+@using Model.Entities
+@inject IRepository<Book> _bookRepository
+
+<h1>Books</h1>
+@if (@BookList is not null) {
+   <table class="table">
+      <thead>
+      <tr>
+         <th scope="col">#</th>
+         <th scope="col">Title</th>
+         <th scope="col">Author</th>
+      </tr>
+      </thead>
+      <tbody>
+         @foreach (var book in BookList) {
+            <tr>
+               <th scope="row">@book.Id</th>
+               <td><a href="bookdata/@book.Id">@book.Title</a></td>
+               <td>
+                  @if (book.BookAuthorList.Count != 0)
+                  {
+                     @book.BookAuthorList[0].Author.FirstName @book.BookAuthorList[0].Author.LastName
+                  }
+               </td>
+            </tr>
+         }
+      </tbody>
+   </table>
+}
+else {
+   <span>Loading ...</span>
+}
+
+@code {
+   public List<Book> BookList { get; set; }
+
+   protected override async Task OnParametersSetAsync() {
+      BookList = await _bookRepository.ReadAllAsync();
+   }
+
+}
