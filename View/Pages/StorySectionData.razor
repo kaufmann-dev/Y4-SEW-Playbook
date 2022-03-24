@@ -1,0 +1,29 @@
+@page "/storysections/{SectionId:int}"
+@using Model.Entities
+@using Domain.Repositories.Interfaces
+@inject IStorySectionRepository _storySectionRepository
+
+@if (StorySection is not null)
+{
+    <h4 class="text-info">@StorySection.Book.Title - @StorySection.Nr</h4>
+    <div class="small text-muted">@StorySection.Content</div>
+    <ul>
+        @foreach (var outcome in StorySection.Outcomes)
+        {
+            <li class="text-muted small">@outcome.Content</li>
+        }
+    </ul>
+}
+
+@code {
+    [Parameter]
+    public int SectionId { get; set; }
+
+    public StorySection StorySection { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        StorySection = await _storySectionRepository.ReadGraphAsync(SectionId);
+    }
+
+}
