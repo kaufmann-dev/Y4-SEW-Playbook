@@ -5,14 +5,13 @@ namespace Model.Entities.Events;
 
 [Table(("MEETING_EVENTS"))]
 public class MeetingEvent : AEvent {
+
+    [Required, StringLength(50)]
     [Column("TITLE")]
-    [StringLength(45)]
-    [Required]
     public string Title { get; set; }
-    
+
+    [Required, DataType(DataType.Text)]
     [Column("DESCRIPTION")]
-    [Required]
-    [StringLength(255)]
-    [DataType(DataType.Text)]
     public string Description { get; set; }
+    
 }

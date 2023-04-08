@@ -10,4 +10,5 @@ public class CombatEvent : AEvent{
 
     [Column("CREATURE_ID")]
     public int CreatureId { get; set; }
+    
 }

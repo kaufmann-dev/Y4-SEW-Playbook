@@ -18,5 +18,6 @@ public class Section
     
     [Column("BOOK_ID")]
     public int BookId { get; set; }
+    
     public Book Book { get; set; }
 }

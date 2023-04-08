@@ -15,5 +15,4 @@ public class BookAuthor
 
     [Column("OCCUPATION_TYPE")]
     public EOccupationType OccupationType { get; set; }
-    
 }

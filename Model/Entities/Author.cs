@@ -21,8 +21,7 @@ public class Author
     [StringLength(45)]
     public string LastName { get; set; }
 
-    public override string ToString()
-    {
+    public override string ToString() {
         return $"{FirstName} {LastName}";
     }
 }

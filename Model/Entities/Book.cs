@@ -16,5 +16,5 @@ public class Book
     [Required]
     public string Title { get; set; }
 
-    public List<BookAuthor> BookAuthorList { get; set; } = new List<BookAuthor>();
+    public List<BookAuthor> BookAuthorList { get; set; }
 }
