@@ -1,8 +1,8 @@
 @page "/bookdata/{BookId:int}"
 @using Model.Entities
 @using Domain.Repositories.Interfaces
-@inject IRepository<Book> _bookRepository
-@inject IRepository<RuleSection> _ruleRepository;
+@inject IBookRepository _bookRepository
+@inject IRuleSectionRepository _ruleRepository;
 
 <h3>Id: @BookId</h3>
 @if (Book is not null)

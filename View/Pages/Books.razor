@@ -2,7 +2,7 @@
 @using Domain.Repositories
 @using Domain.Repositories.Interfaces
 @using Model.Entities
-@inject IRepository<Book> _bookRepository
+@inject IBookRepository _bookRepository
 
 <h1>Books</h1>
 @if (@BookList is not null) {

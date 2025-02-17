@@ -23,6 +23,7 @@ builder.Services.AddDbContext<PlaybookDBContext>(
 
 builder.Services.AddScoped<IStorySectionRepository,StorySectionRepository>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<IRuleSectionRepository, RuleSectionRepository>();
  
 var app = builder.Build();
 
