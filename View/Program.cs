@@ -6,24 +6,23 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.EntityFrameworkCore;
 using Model.Configurations;
 using Model.Entities;
-using View.Data;
+using Model.Entities.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container. 
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddDbContext<PlaybookDBContext>( 
     options => options.UseMySql(
         builder.Configuration.GetConnectionString("DefaultConnection"), 
-        new MySqlServerVersion(new Version(8,0,26))
+        new MySqlServerVersion(new Version(8,0,32))
     )
 );
-
 builder.Services.AddScoped<IStorySectionRepository,StorySectionRepository>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
-builder.Services.AddScoped<IRuleSectionRepository, RuleSectionRepository>();
+builder.Services.AddScoped<IRepository<RuleSection>, RuleSectionRepository>();
+
  
 var app = builder.Build();
 
@@ -45,7 +44,3 @@ app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
 app.Run();
-
-// cd .../imdb/Model
-// dotnet ef --startup-project ../View migrations add mig1
-// dotnet ef --startup-project ../View database update

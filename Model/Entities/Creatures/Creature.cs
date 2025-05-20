@@ -10,9 +10,8 @@ public class Creature {
     [Column("CREATURE_ID")]
     public int Id { get; set; }
 
-    [Required]
+    [Required, StringLength(50)]
     [Column("CREATURE_TYPE")]
-    [StringLength(45)]
     public string CreatureType { get; set; }
 
     [Required, Range(0,100)]

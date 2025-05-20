@@ -1,51 +1,36 @@
 @page "/bookdata/{BookId:int}"
 @using Model.Entities
 @using Domain.Repositories.Interfaces
+@using System.Data
 @inject IBookRepository _bookRepository
-@inject IRuleSectionRepository _ruleRepository;
+@inject IRepository<RuleSection> _ruleRepository
 
-<h3>Id: @BookId</h3>
-@if (Book is not null)
-{
-    <div class="card">
-        <div class="card-body">
-            <div class="card-title">@Book.Title</div>
-            Authors:
-            @if (Book.BookAuthorList.Count > 1)
-            {
-                <ul>
-                    @foreach (var author in Book.BookAuthorList)
-                    {
-                        <li>@author.Author</li>
-                    }
-                </ul>
-            }
-            else
-            {
-                @Book.BookAuthorList[0].Author
-            }
-        </div>
-        <div class="card-footer">
-            <a class="btn btn-success" href="storysections/@BookId">Start journey</a>
-        </div>
-    </div>
-}
-else
-{
-    <span>Loading...</span>
-}
-
+<div class="container">
+    @if (Book is not null) {
+        <h3 class="display-3">@Book.Title</h3>
+        @foreach (var bookAuthor in Book.BookAuthorList) {
+            @bookAuthor.Author<br/>
+        }
+        <br/>
+        @((MarkupString)StoryContent?.Content)
+        <a href="storysections/3">
+            <button class="btn btn-warning">Start Journey</button>
+        </a> 
+    }
+    else {
+        <span>Loading ...</span>
+    }
+</div>
 @code {
     [Parameter]
     public int BookId { get; set; }
+
     public Book? Book { get; set; }
-    
+
     public RuleSection StoryContent { get; set; }
 
-    protected override async Task OnParametersSetAsync()
-    {
-        Book = await _bookRepository.ReadAsync(BookId);
+    protected override async Task OnParametersSetAsync() {
+        Book = await _bookRepository.ReadGraphAsync(BookId);
         StoryContent = (await _ruleRepository.ReadAsync(rr => rr.BookId == BookId && rr.SectionType == ESectionType.THE_STORY_SO_FAR))[0];
     }
-
 }

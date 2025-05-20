@@ -19,4 +19,12 @@
       <ProjectReference Include="..\Model\Model.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\img\arrow.svg" />
+      <_ContentIncludedByDefault Remove="wwwroot\img\ornament.svg" />
+      <_ContentIncludedByDefault Remove="wwwroot\img\page-bg.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\img\page-bg_without.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\img\story-section.png" />
+    </ItemGroup>
+
 </Project>

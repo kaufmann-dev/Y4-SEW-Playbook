@@ -3,17 +3,21 @@
 @using Domain.Repositories.Interfaces
 @inject IStorySectionRepository _storySectionRepository
 
-@if (StorySection is not null)
-{
-    <h4 class="text-info">@StorySection.Book.Title - @StorySection.Nr</h4>
-    <div class="small text-muted">@StorySection.Content</div>
-    <ul>
-        @foreach (var outcome in StorySection.Outcomes)
-        {
-            <li class="text-muted small">@outcome.Content</li>
-        }
-    </ul>
-}
+<div class="container">
+    @if (StorySection is not null) {
+        <h1 class="display-5"><span class="text-warning">#@StorySection.Nr</span> @StorySection.Book.Title </h1>
+        <div class="content-wrapper">
+            @StorySection.Content
+            <ul>
+                @foreach (var outcome in StorySection.OutcomeList) {
+                    <li>
+                        @outcome.Content <a href="/storysections/@outcome.SectionId">@outcome.Section.Nr</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+</div>
 
 @code {
     [Parameter]
@@ -21,9 +25,7 @@
 
     public StorySection StorySection { get; set; }
 
-    protected override async Task OnParametersSetAsync()
-    {
+    protected override async Task OnParametersSetAsync() {
         StorySection = await _storySectionRepository.ReadGraphAsync(SectionId);
     }
-
 }

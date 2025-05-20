@@ -10,5 +10,5 @@ public class StorySection : Section
     [Required, Range(1,500)]
     public int Nr { get; set; }
 
-    public List<Outcome> Outcomes { get; set; }
+    public List<Outcome> OutcomeList { get; set; }
 }

@@ -17,9 +17,9 @@ public class Outcome
     
     [Column("SECTION_ID")]
     public int SectionId { get; set; } 
-    public Section Section { get; set; }
+    public StorySection Section { get; set; }
     
     [Column("ROOT_SECTION_ID")]
     public int RootSectionId { get; set; }
-    public Section RootSection { get; set; }
+    public StorySection RootSection { get; set; }
 }
