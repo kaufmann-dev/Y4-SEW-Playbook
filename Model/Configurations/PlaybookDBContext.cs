@@ -72,13 +72,16 @@ public class PlaybookDBContext : DbContext {
 
         builder.Entity<AAbility>().HasIndex(ability => ability.Code).IsUnique();
 
-        builder.Entity<AAbility>().HasDiscriminator<string>("ABILITY_TYPE").HasValue<Camouflage>("CAMOUFLAGE")
+        builder.Entity<AAbility>().HasDiscriminator<string>("ABILITY_TYPE")
+            .HasValue<Camouflage>("CAMOUFLAGE")
             .HasValue<Hunting>("HUNTING")
-            .HasValue<SixthSense>("SIXTH_SENSE").HasValue<Tracking>("TRACKING").HasValue<Healing>("HEALING")
+            .HasValue<SixthSense>("SIXTH_SENSE").HasValue<Tracking>("TRACKING")
+            .HasValue<Healing>("HEALING")
             .HasValue<Weaponskill>("WEAPONSKILL").HasValue<Mindshield>("MINDSHIELD").HasValue<Mindblast>("MINDBLAST")
             .HasValue<AnimalKinship>("ANIMAL_KINSHIP").HasValue<MindOverMatter>("MIND_OVER_MATTER");
 
-        builder.Entity<AItem>().HasDiscriminator<string>("ITEM_TYPE").HasValue<Weapon>("WEAPON")
+        builder.Entity<AItem>().HasDiscriminator<string>("ITEM_TYPE")
+            .HasValue<Weapon>("WEAPON")
             .HasValue<MagicalItem>("MAGICAL_ITEM")
             .HasValue<Key>("KEY").HasValue<Ultility>("UTILITY").HasValue<Potion>("POTION")
             .HasValue<Scroll>("SCROLL");
